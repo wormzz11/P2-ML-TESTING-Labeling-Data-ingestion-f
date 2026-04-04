@@ -1,0 +1,1 @@
+DATA_PATH = "data\manually_labeled_all labeled.csv"
