@@ -64,7 +64,5 @@ def SGDClassifier_hinge():
     )
 
 
-result = train(logistic_model(), 0.3)
-print(result[2])
 
 
