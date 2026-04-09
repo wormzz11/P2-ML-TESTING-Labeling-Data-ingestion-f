@@ -1,10 +1,10 @@
-#target: 0,8<= recall, while precision>40 for 0.3 threshold 
+
 #Best performances achieved by each model for current purpose of loose sieve as an initial step in data labeling
 #Logistic regression
 
 #[[122 195]
 # [ 17 131]]
-
+#target: 0,8<= recall, while precision>40 for 0.3 threshold 
 
 #              precision    recall  f1-score   support
 

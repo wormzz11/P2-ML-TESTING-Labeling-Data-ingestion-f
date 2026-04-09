@@ -10,3 +10,5 @@ build/
 *.csv
 *.xlsx
 .env
+trained_models/
+.pytest_cache/

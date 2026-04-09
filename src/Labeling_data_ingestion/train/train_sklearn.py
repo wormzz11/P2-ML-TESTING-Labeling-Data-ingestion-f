@@ -11,7 +11,7 @@ from sklearn.pipeline import Pipeline
 df = load_data(DATA_PATH)
 df = df[["title", "theme", "relevant"]]
 
-def train(model, threshold = 0.348):
+def train(model, threshold = 0.3):
     
 
     X = df["title"] + " " + df["theme"] 
