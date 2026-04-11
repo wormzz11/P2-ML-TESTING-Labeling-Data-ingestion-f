@@ -1,5 +1,5 @@
 from Labeling_data_ingestion.config import DATA_PATH
-from  Labeling_data_ingestion.data_handler.import_data import load_data
+from  Labeling_data_ingestion.data_handler.process_data import load_data
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from  sklearn.metrics import accuracy_score
