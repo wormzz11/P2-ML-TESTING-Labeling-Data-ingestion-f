@@ -1,5 +1,4 @@
 from sklearn.linear_model import LogisticRegression, SGDClassifier
-from Labeling_data_ingestion.train.train_sklearn import train
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.naive_bayes  import ComplementNB
 from sklearn.svm import LinearSVC

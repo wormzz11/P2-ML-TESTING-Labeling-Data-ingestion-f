@@ -1,14 +1,11 @@
 # Labeling-Data-ingestion
 
-sklearn -> finished, Logistic regression (first sieve)
+sklearn with tf idf-> finished, Logistic regression (first sieve) 
+transformer with ? -> research phase
 pytorch -> ?,?
-transformer ->?,?
+
 
 
 ### TODO:
 
-Separate by confidence levels:
-those are not final values, prolly will change during testing
-LOW(<=.30) - discard
-medium(0.30 - 0.7) - manual review/recycle
-high(=> 0.7) - add to data 
+First introduction of transformer to see a ll-MiniLM-L6-v2 probably but might pick something else from hugging face depending on the results

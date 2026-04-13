@@ -1,5 +1,5 @@
 
-#Best performances achieved by each model for current purpose of loose sieve as an initial step in data labeling
+#Best performances achieved by each model for current purpose of loose sieve as an initial step in data labeling with TF-IDF
 #Logistic regression
 
 #[[122 195]
