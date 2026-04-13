@@ -1,3 +1,35 @@
 #train_TFIDF  -> finished
-#train_transformer -> in progress
+#train_transformer -> finished
 #pytorch_model.py -> to be  created possibly
+
+#Logistic regression
+
+#TF-IDF 0.25 threshold, training performance
+
+              precision    recall  f1-score   support
+
+         0.0       0.91      0.13      0.23       437
+         1.0       0.35      0.97      0.51       206
+
+    accuracy                           0.40       643
+   macro avg       0.63      0.55      0.37       643
+weighted avg       0.73      0.40      0.32       643
+
+[[ 58 379]
+ [  6 200]]
+
+
+#all sentence-transformers/all-MiniLM-L6-v2, 0.25 threshold, training performance
+
+
+              precision    recall  f1-score   support
+
+         0.0       0.94      0.32      0.48       437
+         1.0       0.40      0.96      0.56       206
+
+    accuracy                           0.53       643
+   macro avg       0.67      0.64      0.52       643
+weighted avg       0.77      0.53      0.51       643
+
+[[142 295]
+ [  9 197]]

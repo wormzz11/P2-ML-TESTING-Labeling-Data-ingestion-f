@@ -11,6 +11,6 @@ class MiniLmVectorizer(BaseEstimator, TransformerMixin):
         return self
     
     def transform(self, X):
-        return self.model.encode(X.tolist(), show_progress_bar=True)
+        return self.model.encode(X.tolist(), show_progress_bar=False)
 
         
