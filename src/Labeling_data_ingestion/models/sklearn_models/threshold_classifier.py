@@ -1,5 +1,5 @@
 from sklearn.base import BaseEstimator, ClassifierMixin
-
+from dataclasses import dataclass
 class ThresholdClassifier(BaseEstimator, ClassifierMixin):
 
     def __init__(self, estimator, threshold=0.5):
@@ -21,4 +21,5 @@ class ThresholdClassifier(BaseEstimator, ClassifierMixin):
     def predict_proba(self, X):
         return self.estimator.predict_proba(X)    
         
-        
+
+

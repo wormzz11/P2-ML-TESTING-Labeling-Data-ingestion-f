@@ -1,24 +1,28 @@
-from Labeling_data_ingestion.config import DATA_PATH
-from  Labeling_data_ingestion.data_handler.process_data import load_data
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from  sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
-import joblib
 from sklearn.pipeline import Pipeline
 from Labeling_data_ingestion.models.sklearn_models.threshold_classifier import ThresholdClassifier
 from Labeling_data_ingestion.models.sklearn_models.transformer import MiniLmVectorizer
-def train_tfidf(model, threshold = 0.45):
-    
-    df = load_data(DATA_PATH)
-    df = df[["title", "theme", "relevant"]].dropna()
-    
+import joblib
+
+
+def train_test(df, test_size, seed = 40):
 
     X = df["title"] + " " + df["theme"] 
     y = df["relevant"]
-    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=40, test_size=0.20)
     
+    return train_test_split(X, y, random_state=seed, test_size=test_size)
+
+
+
+def train_tfidf(model, X_train ,y_train,threshold = 0.45):
+    
+    if X_train is None or y_train is None:
+        raise ValueError("Training data is None")
+
     wrapped = ThresholdClassifier(model, threshold=threshold)
 
     pipe = Pipeline([(
@@ -31,33 +35,18 @@ def train_tfidf(model, threshold = 0.45):
             ("model", wrapped)
     ])
 
-
     pipe.fit(X_train, y_train)
 
+    return pipe
 
 
-    y_pred = pipe.predict(X_test)
 
-    accuracy = accuracy_score(y_test, y_pred)
 
-    print(classification_report(y_test, y_pred))
+def train_transformer(model, X_train, y_train, threshold = 0.45 ):
 
-    print(confusion_matrix(y_test, y_pred))
+    if X_train is None or y_train is None:
+        raise ValueError("Training data is None")
 
-    joblib.dump(pipe, "trained_models/tfIDF_pipeline.rfk")
-
-    return pipe, accuracy
-
-def train_transformer(model, threshold = 0.45 ):
-
-    df = load_data(DATA_PATH)
-    df = df[["title", "theme", "relevant"]].dropna()
-    
-
-    X = df["title"] + " " + df["theme"] 
-    y = df["relevant"]
-    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=40, test_size=0.20)
-    
     wrapped = ThresholdClassifier(model, threshold=threshold)
 
     pipe = Pipeline([(
@@ -66,21 +55,27 @@ def train_transformer(model, threshold = 0.45 ):
             ("model", wrapped)
     ])
 
-
     pipe.fit(X_train, y_train)
 
+    return pipe
 
 
+
+def evaluate(pipe, X_test, y_test):
     y_pred = pipe.predict(X_test)
 
-    accuracy = accuracy_score(y_test, y_pred)
+    cm = confusion_matrix(y_test, y_pred)
+    report = classification_report(y_test, y_pred)
+    acc = accuracy_score(y_test, y_pred)
 
-    print(classification_report(y_test, y_pred))
+    return {
+        "accuracy": acc,
+        "confusion_matrix": cm,
+        "report": report
+    }
 
-    print(confusion_matrix(y_test, y_pred))
 
-    joblib.dump(pipe, "trained_models/transformer_pipeline.rfk")
 
-    return pipe, accuracy
+def save_model(pipe, path):
+    joblib.dump(pipe, path)
 
-    
