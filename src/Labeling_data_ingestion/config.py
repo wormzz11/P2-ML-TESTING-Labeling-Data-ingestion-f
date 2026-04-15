@@ -1,4 +1,7 @@
-DATA_PATH = "data/ground_truth_fallback/combined_truth.csv"
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+DATA_PATH = ROOT / "data" / "ground_truth_fallback" / "combined_truth.csv"
 from dataclasses import dataclass
 
 @dataclass

@@ -1,4 +1,5 @@
 from Labeling_data_ingestion.config import DATA_PATH
+from Labeling_data_ingestion.config import ThresholdConfig
 from Labeling_data_ingestion.data_handler.process_data import build_dataset, load_data
 from Labeling_data_ingestion.models.sklearn_models.sk_models import logistic_model
 from Labeling_data_ingestion.train.train import (
@@ -17,6 +18,7 @@ models = {
 
 def run_pipeline(model_name="transformer"):
 
+    config = ThresholdConfig()
     df = load_data(DATA_PATH)
     df = build_dataset(df)
     
@@ -29,8 +31,8 @@ def run_pipeline(model_name="transformer"):
         
     pipe = models[model_name](base_model, X_train, y_train)
 
-    results = evaluate(pipe, X_test, y_test)
-
+    results = evaluate(pipe, X_test, y_test, config.high_pos)
+    print(results)
     save_model(pipe, f"trained_models/{model_name}.rfk")
 
     return pipe, results

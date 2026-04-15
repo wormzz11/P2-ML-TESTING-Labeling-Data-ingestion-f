@@ -31,8 +31,7 @@ def run_prediction(input_path, model_path):
     manual_df = df.loc[manual_review].copy()
     manual_df["score"] = scores[manual_review]
 
-    print(manual_df[["title", "theme", "score"]].sort_values("score", ascending=False).head(20))
-    print(manual_df[["title", "theme", "score"]].sort_values("score").head(20))
+
 
 
 

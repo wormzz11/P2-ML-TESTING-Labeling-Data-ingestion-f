@@ -7,7 +7,7 @@ from sklearn.pipeline import Pipeline
 from Labeling_data_ingestion.models.sklearn_models.threshold_classifier import ThresholdClassifier
 from Labeling_data_ingestion.models.sklearn_models.transformer import MiniLmVectorizer
 import joblib
-
+from pathlib import Path
 
 def train_test(df, test_size, seed = 40):
 
@@ -42,7 +42,7 @@ def train_tfidf(model, X_train ,y_train,threshold = 0.45):
 
 
 
-def train_transformer(model, X_train, y_train, threshold = 0.45 ):
+def train_transformer(model, X_train, y_train, threshold = 0.26 ):
 
     if X_train is None or y_train is None:
         raise ValueError("Training data is None")
@@ -61,8 +61,9 @@ def train_transformer(model, X_train, y_train, threshold = 0.45 ):
 
 
 
-def evaluate(pipe, X_test, y_test):
-    y_pred = pipe.predict(X_test)
+def evaluate(pipe, X_test, y_test, threshold = 0.26):
+    proba = pipe.predict_proba(X_test)[:, 1]
+    y_pred = (proba >= threshold).astype(int)
 
     cm = confusion_matrix(y_test, y_pred)
     report = classification_report(y_test, y_pred)
@@ -77,5 +78,6 @@ def evaluate(pipe, X_test, y_test):
 
 
 def save_model(pipe, path):
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
     joblib.dump(pipe, path)
-
