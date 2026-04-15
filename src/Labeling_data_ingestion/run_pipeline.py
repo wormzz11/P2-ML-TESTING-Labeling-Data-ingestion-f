@@ -32,7 +32,6 @@ def run_pipeline(model_name="transformer"):
     pipe = models[model_name](base_model, X_train, y_train)
 
     results = evaluate(pipe, X_test, y_test, config.high_pos)
-    print(results)
     save_model(pipe, f"trained_models/{model_name}.rfk")
 
     return pipe, results
