@@ -8,4 +8,6 @@ pytorch -> ?,?
 
 ### TODO:
 
-Introduce visual evaluation using matplotlib before  diving into pytorch for educational purposes
+1.Introduce visual evaluation using matplotlib 
+2. implement possible theme estimation for fully automating the data labeling process 
+
